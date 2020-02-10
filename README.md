@@ -6,6 +6,19 @@ Generate a responsive menu.
 
 git clone https://github.com/Wylianne/menu_responsivo.git
 
+### Pubspec.yaml
+```
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  .
+  .
+  .
+  flutter_responsive_menu:
+    path: ../flutter_responsive_menu
+```
+
 ## Example
 
 ```dart
