@@ -9,6 +9,10 @@ git clone https://github.com/Wylianne/menu_responsivo.git
 ## Example
 
 ```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_responsive_menu/flutter_responsive_menu.dart';
+
+
 class MenuPrincipal extends StatefulWidget {
   @override
   _MenuPrincipalState createState() => _MenuPrincipalState();
@@ -94,16 +98,6 @@ List<dynamic> itensMenu = [
         "titulo": "Sub 2",
       },
     ]
-  },
-  {
-    "icone": Icons.lock_outline,
-    "widget": Indicadores(),
-    "titulo": "Termos de uso"
-  },
-  {
-    "icone": Icons.info_outline,
-    "widget": Indicadores(),
-    "titulo": "Sobre o Aplicativo"
   },
 ];
 ```
