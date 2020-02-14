@@ -91,11 +91,6 @@ class _MenuLateralState extends State<MenuLateral> {
 
   _addItem(i, myIcon, txt, Color corIcone, Color corTxt, {txtSubtitle, submenu}) {
 
-
-    print(childKeys.length);
-    print(i);
-
-
     if (childKeys.length <= i){
       childKeys.insert(i, GlobalKey());
     }else{

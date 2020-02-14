@@ -306,12 +306,6 @@ class OverlaySelectorItem extends StatelessWidget {
           idTela = overlayItemData.idTela;
           idSubMenu = overlayItemData.idSubmenu;
 
-          print("teste teste teste teste");
-          print(idTela);
-          print(idSubMenu);
-          print(overlayItemData.router);
-
-
           /*Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
           overlayItemData.router), (Route<dynamic> route) => false);*/
 

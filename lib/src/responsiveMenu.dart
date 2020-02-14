@@ -86,7 +86,17 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                       backgroundColor: corAppBarConteudo,
                     ),
                     //backgroundColor: Colors.grey,
-                    body: getPage(),
+                    body: SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * 0.01,
+                            left: MediaQuery.of(context).size.width * 0.01,
+                            bottom: MediaQuery.of(context).size.width * 0.01,
+                            top: MediaQuery.of(context).size.width * 0.01
+                        ),
+                        child: getPage(),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -110,8 +120,6 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
 
 
   getSize(){
-
-    print(MediaQuery.of(context).size.width);
     if(MediaQuery.of(context).size.width > 770){
 
       if(menuAtivo){
@@ -139,12 +147,9 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
   getPage(){
 
     if(idSubMenu != null){
-      print(widget.menuItens[idTela]["widget"]);
-      print(idSubMenu);
       return widget.menuItens[idTela]["submenu"][idSubMenu]["widget"];
 
     }else{
-      print(widget.menuItens[idTela]["widget"]);
       return widget.menuItens[idTela]["widget"];
     }
 
