@@ -6,6 +6,7 @@ double right = 0;
 double rightMenu = 45;
 double sizeWidthMenu = 0;
 double sizeWidthConteudo = 0;
+double marginConteudo = 0;
 double posicaoDireitaMenu = 0;
 double sizeWidthSubmenu = 0;
 

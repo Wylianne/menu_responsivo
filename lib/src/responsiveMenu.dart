@@ -47,6 +47,8 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
   Widget build(BuildContext context) {
     getSize();
 
+    marginConteudo = MediaQuery.of(context).size.width * 0.01;
+
     return GestureDetector(
       onHorizontalDragEnd: (drag){
         setState(() {
@@ -88,11 +90,8 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                     //backgroundColor: Colors.grey,
                     body: SingleChildScrollView(
                       child: Container(
-                        margin: EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * 0.01,
-                            left: MediaQuery.of(context).size.width * 0.01,
-                            bottom: MediaQuery.of(context).size.width * 0.01,
-                            top: MediaQuery.of(context).size.width * 0.01
+                        margin: EdgeInsets.all(
+                            marginConteudo
                         ),
                         child: getPage(),
                       ),
@@ -120,6 +119,9 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
 
 
   getSize(){
+
+
+
     if(MediaQuery.of(context).size.width > 770){
 
       if(menuAtivo){
@@ -132,6 +134,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
       //rightMenu = sizeWidthMenu - MediaQuery.of(context).size.width;
       rightMenu = MediaQuery.of(context).size.width - sizeWidthMenu;
       sizeWidthConteudo = MediaQuery.of(context).size.width - sizeWidthMenu;
+
     }else{
       if(menuAtivo){
         right = -(sizeWidthMenu);
@@ -145,7 +148,6 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
   }
 
   getPage(){
-
     if(idSubMenu != null){
       return widget.menuItens[idTela]["submenu"][idSubMenu]["widget"];
 
