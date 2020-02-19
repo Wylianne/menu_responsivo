@@ -88,13 +88,11 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                       backgroundColor: corAppBarConteudo,
                     ),
                     //backgroundColor: Colors.grey,
-                    body: SingleChildScrollView(
-                      child: Container(
-                        margin: EdgeInsets.all(
-                            marginConteudo
-                        ),
-                        child: getPage(),
+                    body: Container(
+                      margin: EdgeInsets.all(
+                          marginConteudo
                       ),
+                      child: getPage(),
                     ),
                   ),
                 ),
