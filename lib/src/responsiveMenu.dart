@@ -106,11 +106,6 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                   ),
                   //backgroundColor: Colors.grey,
                   body: Container(
-                    margin: EdgeInsets.only(
-                      right: marginConteudo,
-                      left: marginConteudo,
-                      top: marginConteudo,
-                    ),
                     child: getPage(),
                   ),
                 ),
