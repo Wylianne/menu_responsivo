@@ -6,7 +6,10 @@ class MenuLateral extends StatefulWidget {
 
   List menuItens;
   List<Color> menuColors;
-  MenuLateral(this.menuItens, this.menuColors);
+  Widget logout;
+  IconData iconeLogout;
+
+  MenuLateral(this.menuItens, this.menuColors, this.logout, this.iconeLogout);
 
   @override
   _MenuLateralState createState() => _MenuLateralState();
@@ -87,19 +90,22 @@ class _MenuLateralState extends State<MenuLateral> {
 
     }
 
+    conteudo.add(
+        _addItem(
+            itensMenu.length,
+            widget.iconeLogout,
+            "Logout",
+            Colors.white,
+            Colors.white,
+            txtSubtitle: "",
+            submenu: []
+        )
+    );
+
     return conteudo;
   }
 
   _addItem(i, myIcon, txt, Color corIcone, Color corTxt, {txtSubtitle, submenu}) {
-
-
-        if (childKeys.length <= i){
-          childKeys.insert(i, GlobalKey());
-        }else{
-          childKeys[i] = GlobalKey();
-        }
-
-
         if(menuAtivo){
           if(txtSubtitle == null){
             if(submenu.length > 0){
@@ -171,17 +177,25 @@ class _MenuLateralState extends State<MenuLateral> {
                   ),
                 ),
                 onTap: (){
-                  setState(() {
-                    right = 0;
-                    idTela = i;
-                    idSubMenu = null;
-                    menuAtivo = false;
-
+                  if(i == widget.menuItens.length){
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => route),
+                      MaterialPageRoute(builder: (context) => widget.logout),
                     );
-                  });
+                  }else{
+                    setState(() {
+                      right = 0;
+                      idTela = i;
+                      idSubMenu = null;
+                      menuAtivo = false;
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => route),
+                      );
+                    });
+                  }
+
                 },
               );
             }
@@ -206,17 +220,23 @@ class _MenuLateralState extends State<MenuLateral> {
                 ),
               ),
               onTap: (){
-                setState(() {
-                  right = 0;
-                  idTela = i;
-                  idSubMenu = null;
-
+                if(i == widget.menuItens.length){
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => route),
+                    MaterialPageRoute(builder: (context) => widget.logout),
                   );
-                });
+                }else {
+                  setState(() {
+                    right = 0;
+                    idTela = i;
+                    idSubMenu = null;
 
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => route),
+                    );
+                  });
+                }
               },
             );
           }
@@ -278,15 +298,23 @@ class _MenuLateralState extends State<MenuLateral> {
                             color: corIcone,
                           ),
                           onTap: (){
-                            setState(() {
-                              right = 0;
-                              idTela = i;
-                              idSubMenu = null;
+                            if(i == widget.menuItens.length){
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => route),
+                                MaterialPageRoute(builder: (context) => widget.logout),
                               );
-                            });
+                            }else {
+                              setState(() {
+                                right = 0;
+                                idTela = i;
+                                idSubMenu = null;
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => route),
+                                );
+                              });
+                            }
                           },
                         ),
                       ),

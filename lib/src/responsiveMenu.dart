@@ -13,14 +13,17 @@ class ResponsiveMenu extends StatefulWidget {
   final double webMenuWidthActive;
   final double webMenuWidthDisabled;
   final double mobileMenuWidth;
-  Widget rota;
+  Widget rotaInicial;
+  Widget logout;
+  IconData iconeLogout;
 
-  ResponsiveMenu(
-      this.menuItens,
-      this.barMenuItens,
-      this.menuColors,
-      this.rota,
-      {
+  ResponsiveMenu({
+      @required this.menuItens,
+      @required this.barMenuItens,
+      @required this.menuColors,
+      @required this.rotaInicial,
+      @required this.logout,
+          this.iconeLogout = Icons.arrow_back,
           this.iconColor = Colors.white,
           this.textColor = Colors.white,
           this.webMenuWidthActive = 300,
@@ -43,7 +46,19 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
     corAppBarMenu = widget.menuColors[1];
     corMenuConteudo = widget.menuColors[2];
 
-    route = ResponsiveMenu(widget.menuItens, widget.barMenuItens, widget.menuColors, widget.rota);
+    route = ResponsiveMenu(
+        menuItens: widget.menuItens,
+        barMenuItens: widget.barMenuItens,
+        menuColors: widget.menuColors,
+        rotaInicial: widget.rotaInicial,
+        logout: widget.logout,
+        iconeLogout: widget.iconeLogout,
+        iconColor: widget.iconColor,
+        textColor: widget.textColor,
+        webMenuWidthActive: widget.webMenuWidthActive,
+        webMenuWidthDisabled: widget.webMenuWidthDisabled,
+        mobileMenuWidth: widget.mobileMenuWidth,
+    );
   }
 
 
@@ -109,7 +124,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
               child: Container(
                   width: sizeWidthMenu,
                   height: 100,
-                  child: MenuLateral(widget.menuItens, widget.menuColors)
+                  child: MenuLateral(widget.menuItens, widget.menuColors, widget.logout, widget.iconeLogout,)
               ),
             ),
           ],
@@ -146,7 +161,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
   }
 
   getPage(){
-    if(idSubMenu != null){
+    if(idSubMenu != null && idTela > -1){
       return widget.menuItens[idTela]["submenu"][idSubMenu]["widget"];
     }else{
       return widget.menuItens[idTela]["widget"];
