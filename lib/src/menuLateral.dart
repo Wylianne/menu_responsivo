@@ -8,8 +8,10 @@ class MenuLateral extends StatefulWidget {
   List<Color> menuColors;
   Widget logout;
   IconData iconeLogout;
+  String logo;
+  String nomeAplicativo;
 
-  MenuLateral(this.menuItens, this.menuColors, this.logout, this.iconeLogout);
+  MenuLateral(this.menuItens, this.menuColors, this.logout, this.iconeLogout, this.nomeAplicativo, this.logo);
 
   @override
   _MenuLateralState createState() => _MenuLateralState();
@@ -30,14 +32,14 @@ class _MenuLateralState extends State<MenuLateral> {
           alignment: Alignment.center,
           child:
           MediaQuery.of(context).size.width  > 770 && menuAtivo == false ?
-            Image.asset(
-                "assets/icon_logo.png",
+            Image.network(
+                widget.logo,
                 color: Colors.white,
                 width: sizeWidthMenu
             )
                 :
             Text(
-              "ORC Carajás",
+              widget.nomeAplicativo,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -90,6 +92,7 @@ class _MenuLateralState extends State<MenuLateral> {
 
     }
 
+
     conteudo.add(
         _addItem(
             itensMenu.length,
@@ -126,40 +129,39 @@ class _MenuLateralState extends State<MenuLateral> {
                   Icons.keyboard_arrow_down,
                   color: corIcone,
                 ),
-                children: submenu
-                    .map<ListTile>(
+                children: submenu.map<ListTile>(
                         (item) => ListTile(
-                      contentPadding: EdgeInsets.only(
-                          left: sizeWidthMenu * 0.2
-                      ),
-                      title: Row(
-                        children: <Widget>[
-                          Icon(
-                            item["icone"],
-                            color: corIcone,
-                          ),
-                          Text(
-                            " " + item["titulo"],
-                            style: TextStyle(
-                                color: corTxt,
-                                fontWeight: FontWeight.bold
+                            contentPadding: EdgeInsets.only(
+                                left: sizeWidthMenu * 0.2
                             ),
-                          ),
-                        ],
-                      ),
-                      onTap: (){
-                        setState(() {
-                          right = 0;
-                          idTela = i;
-                          menuAtivo = false;
-                          idSubMenu = item["id"];
+                            title: Row(
+                              children: <Widget>[
+                                Icon(
+                                  item["icone"],
+                                  color: corIcone,
+                                ),
+                                Text(
+                                  " " + item["titulo"],
+                                  style: TextStyle(
+                                      color: corTxt,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onTap: (){
+                              setState(() {
+                                right = 0;
+                                idTela = i;
+                                menuAtivo = false;
+                                idSubMenu = item["id"];
 
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => route),
-                          );
-                        });
-                      },
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => route),
+                                );
+                              });
+                            },
                     )
                 ).toList(),
               );

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_responsive_menu/src/globals.dart';
 import 'package:flutter_responsive_menu/src/menuLateral.dart';
 import 'package:badges/badges.dart';
+
+import 'globals.dart';
+
 
 class ResponsiveMenu extends StatefulWidget {
   final List menuItens;
@@ -13,8 +17,11 @@ class ResponsiveMenu extends StatefulWidget {
   final double webMenuWidthActive;
   final double webMenuWidthDisabled;
   final double mobileMenuWidth;
+  final List<Locale> supportedLocales;
   Widget rotaInicial;
   Widget logout;
+  String logo;
+  String nomeAplicativo;
   IconData iconeLogout;
 
   ResponsiveMenu({
@@ -23,12 +30,16 @@ class ResponsiveMenu extends StatefulWidget {
       @required this.menuColors,
       @required this.rotaInicial,
       @required this.logout,
+      @required this.logo,
+      @required this.nomeAplicativo,
+      @required this.supportedLocales,
           this.iconeLogout = Icons.arrow_back,
           this.iconColor = Colors.white,
           this.textColor = Colors.white,
           this.webMenuWidthActive = 300,
           this.webMenuWidthDisabled = 65,
-          this.mobileMenuWidth = 210
+          this.mobileMenuWidth = 210,
+
       }
   );
 
@@ -52,6 +63,8 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
         menuColors: widget.menuColors,
         rotaInicial: widget.rotaInicial,
         logout: widget.logout,
+        logo: widget.logo,
+        nomeAplicativo: widget.nomeAplicativo,
         iconeLogout: widget.iconeLogout,
         iconColor: widget.iconColor,
         textColor: widget.textColor,
@@ -89,6 +102,14 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
               duration: Duration( milliseconds: duracaoMilliseconds),
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
+                localizationsDelegates: [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: [
+                  const Locale('pt'),
+                ],
                 home: Scaffold(
                   resizeToAvoidBottomInset: false,
                   appBar: AppBar(
@@ -96,7 +117,12 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                         icon: Icon(Icons.menu),
                         onPressed: () {
                           setState(() {
+
                             menuAtivo = !menuAtivo;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => route),
+                            );
                           });
                         }
                     ),
@@ -119,7 +145,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
               child: Container(
                   width: sizeWidthMenu,
                   height: 100,
-                  child: MenuLateral(widget.menuItens, widget.menuColors, widget.logout, widget.iconeLogout,)
+                  child: MenuLateral(widget.menuItens, widget.menuColors, widget.logout, widget.iconeLogout, widget.nomeAplicativo, widget.logo)
               ),
             ),
           ],
@@ -156,11 +182,17 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
   }
 
   getPage(){
-    if(idSubMenu != null && idTela > -1){
-      return widget.menuItens[idTela]["submenu"][idSubMenu]["widget"];
+    if(widget.rotaInicial == null){
+      if(idSubMenu != null && idTela > -1){
+        return widget.menuItens[idTela]["submenu"][idSubMenu]["widget"];
+      }else{
+        return widget.menuItens[idTela]["widget"];
+      }
     }else{
-      return widget.menuItens[idTela]["widget"];
+      widget.rotaInicial = null;
+      return widget.rotaInicial;
     }
+
 
   }
 
@@ -238,3 +270,7 @@ class ItemMenu{
   ItemMenu({@required this.icone, @required this.visivel, @required this.titulo, @required this.widget, @required this.submenuAtivo, @required this.submenu});
 }
 
+
+getSizeWidthConteudo(){
+  return sizeWidthConteudo;
+}

@@ -4,12 +4,7 @@ import 'package:flutter_responsive_menu/src/globals.dart';
 
 AnimationController animationController;
 Animation<double> scaleAnimation;
-
 OverlayEntry overlayEntry;
-
-//GlobalKey childKey = new GlobalKey();
-
-
 
 class OverlaySelector extends StatefulWidget {
   final int idKey;
@@ -64,7 +59,6 @@ class _OverlaySelectorState extends State<OverlaySelector> with SingleTickerProv
             data,
             widget.checkedItemData.index,
                 (selectItemData){
-              //print('on select overlay item');
               widget.onSelectChanged(selectItemData);
               animationController.reverse().then((_){
                 overlayEntry.remove();
@@ -87,7 +81,6 @@ class _OverlaySelectorState extends State<OverlaySelector> with SingleTickerProv
               builder: (context2, child){
                 return MouseRegion(
                   onHover: (teste){
-                    //print('OverlaySelector child widget click');
                     Offset childOffset;
 
                     if (childKeys[widget.idKey] != null){
@@ -112,7 +105,6 @@ class _OverlaySelectorState extends State<OverlaySelector> with SingleTickerProv
                                         color: Colors.transparent,
                                       ),
                                       onTap: (){
-                                        //print('on select overlay container');
                                         animationController.reverse().then((_){
                                           // setState(() {
                                           //   containerColor = Colors.transparent;
@@ -189,7 +181,6 @@ class _OverlaySelectorState extends State<OverlaySelector> with SingleTickerProv
           )
       ),
 /*      onTap: (){
-        //print('OverlaySelector child widget click');
         Offset childOffset;
 
         if (childKey != null){
@@ -214,7 +205,6 @@ class _OverlaySelectorState extends State<OverlaySelector> with SingleTickerProv
                             color: Colors.transparent,
                           ),
                           onTap: (){
-                            //print('on select overlay container');
                             animationController.reverse().then((_){
                               // setState(() {
                               //   containerColor = Colors.transparent;

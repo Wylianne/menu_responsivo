@@ -13,12 +13,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Container(
-        child: ResponsiveMenu(
-            [],
-            [],
-            [],
-            Container(),
-        ),
       ),
     );
   }
