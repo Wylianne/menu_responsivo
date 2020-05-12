@@ -61,7 +61,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
         menuItens: widget.menuItens,
         barMenuItens: widget.barMenuItens,
         menuColors: widget.menuColors,
-        rotaInicial: widget.rotaInicial,
+        rotaInicial: null,
         logout: widget.logout,
         logo: widget.logo,
         nomeAplicativo: widget.nomeAplicativo,
@@ -182,7 +182,13 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
   }
 
   getPage(){
+    print(widget.rotaInicial);
+
+
     if(widget.rotaInicial == null){
+      print(widget.rotaInicial);
+
+
       if(idSubMenu != null && idTela > -1){
         return widget.menuItens[idTela]["submenu"][idSubMenu]["widget"];
       }else{
