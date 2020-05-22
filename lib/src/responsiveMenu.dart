@@ -112,6 +112,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                 ],
                 home: Scaffold(
                   resizeToAvoidBottomInset: false,
+                  extendBodyBehindAppBar: true,
                   appBar: AppBar(
                     leading: IconButton(
                         icon: Icon(Icons.menu),
