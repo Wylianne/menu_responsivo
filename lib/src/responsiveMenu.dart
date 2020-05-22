@@ -127,6 +127,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
                           });
                         }
                     ),
+                    elevation: 0,
                     actions: getBarMenuItens(widget.barMenuItens),
                     title: Text(widget.menuItens[idTela]["titulo"]),
                     backgroundColor: corAppBarConteudo,
