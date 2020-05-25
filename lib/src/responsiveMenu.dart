@@ -178,7 +178,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
         right = 0;
       }
       rightMenu = MediaQuery.of(context).size.width;
-      sizeWidthMenu = mobileMenuWidth;
+      sizeWidthMenu = MediaQuery.of(context).size.width * 0.7;
       sizeWidthConteudo = MediaQuery.of(context).size.width;
     }
   }
