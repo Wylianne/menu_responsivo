@@ -197,7 +197,6 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> with SingleTickerProvid
         return widget.menuItens[idTela]["widget"];
       }
     }else{
-      widget.rotaInicial = null;
       return widget.rotaInicial;
     }
 
