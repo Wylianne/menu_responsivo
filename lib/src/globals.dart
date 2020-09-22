@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 
@@ -10,12 +12,13 @@ double marginConteudo = 0;
 double posicaoDireitaMenu = 0;
 double sizeWidthSubmenu = 0;
 
-int duracaoMilliseconds = 300;
+int duracaoMilliseconds = 200;
 int idTela = 0;
 int idSubMenu = null;
 Widget telaAtual;
 
 Widget route;
+Widget lastRoute;
 
 bool menuAtivo = false;
 
@@ -23,6 +26,7 @@ bool menuAtivo = false;
 List<Key> keysMenu = [];
 
 
+//final streamMenuController = StreamController.broadcast();
 
 List childKeys = [];
 

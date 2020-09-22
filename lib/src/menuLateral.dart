@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'globals.dart';
+
 
 class MenuLateral extends StatefulWidget {
 
@@ -34,8 +36,8 @@ class _MenuLateralState extends State<MenuLateral> {
           MediaQuery.of(context).size.width  > 770 && menuAtivo == false ?
             Image.network(
                 widget.logo,
-                color: Colors.white,
-                width: sizeWidthMenu
+                //width: sizeWidthMenu,
+                alignment: Alignment.center,
             )
                 :
             Text(
@@ -112,42 +114,49 @@ class _MenuLateralState extends State<MenuLateral> {
         if(menuAtivo){
           if(txtSubtitle == null){
             if(submenu.length > 0){
-              return ExpansionTile(
-                initiallyExpanded: widget.menuItens[i]["submenuAtivo"],
-                leading: Icon(
-                  myIcon,
-                  color: corIcone,
-                ),
-                title: Text(
-                  txt,
-                  style: TextStyle(
-                      color: corTxt,
-                      fontWeight: FontWeight.bold
+              return SingleChildScrollView(
+                child: ExpansionTile(
+                  initiallyExpanded: widget.menuItens[i]["submenuAtivo"],
+                  leading: Icon(
+                    myIcon,
+                    color: corIcone,
                   ),
-                ),
-                trailing: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: corIcone,
-                ),
-                children: submenu.map<ListTile>(
-                        (item) => ListTile(
+                  title: Text(
+                    txt,
+                    style: TextStyle(
+                        color: corTxt,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: corIcone,
+                  ),
+                  children: <Widget>[
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: submenu.length,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = submenu[index];
+
+                        return Container(
+                          width: sizeWidthMenu * 0.9,
+                          child: ListTile(
                             contentPadding: EdgeInsets.only(
-                                left: sizeWidthMenu * 0.2
+                                left: sizeWidthMenu * 0.1
                             ),
-                            title: Row(
-                              children: <Widget>[
-                                Icon(
-                                  item["icone"],
-                                  color: corIcone,
-                                ),
-                                Text(
-                                  " " + item["titulo"],
-                                  style: TextStyle(
-                                      color: corTxt,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
+                            leading: Icon(
+                              item["icone"],
+                              color: corIcone,
+                            ),
+                            title: AutoSizeText(
+                              " " + item["titulo"],
+                              maxLines: 1,
+                              style: TextStyle(
+                                  color: corTxt,
+                                  fontWeight: FontWeight.bold,
+                              ),
                             ),
                             onTap: (){
                               setState(() {
@@ -162,8 +171,12 @@ class _MenuLateralState extends State<MenuLateral> {
                                 );
                               });
                             },
-                    )
-                ).toList(),
+                          ),
+                        );
+                      },
+                    ),
+                  ]
+                ),
               );
             }else{
               return ListTile(
@@ -244,37 +257,39 @@ class _MenuLateralState extends State<MenuLateral> {
           }
         }else{
             if(submenu.length > 0){
-              return Tooltip(
-                message: txt,
-                child: Container(
-                  width: 65,
-                  height: 60,
-                  color: idTela == i ? Colors.blue[900]: corMenuConteudo,
-                  //color: corAppBarMenu,
-                  alignment: Alignment.centerRight,
+              return SingleChildScrollView(
+                child: Tooltip(
+                  message: txt,
                   child: Container(
-                    width: 60,
+                    width: 65,
                     height: 60,
-                    color: corMenuConteudo,
-                    child: ListTile(
-                        leading: Icon(
-                          myIcon,
-                          color: corIcone,
-                        ),
-                        onTap: (){
-                          setState(() {
-                            menuAtivo = !menuAtivo;
+                    color: idTela == i ? Colors.blue[900]: corMenuConteudo,
+                    //color: corAppBarMenu,
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      color: corMenuConteudo,
+                      child: ListTile(
+                          leading: Icon(
+                            myIcon,
+                            color: corIcone,
+                          ),
+                          onTap: (){
+                            setState(() {
+                              menuAtivo = !menuAtivo;
 
-                            fechaSubmenus();
+                              fechaSubmenus();
 
-                            widget.menuItens[i]["submenuAtivo"] = true;
+                              widget.menuItens[i]["submenuAtivo"] = true;
 
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => route),
-                            );
-                          });
-                        },
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => route),
+                              );
+                            });
+                          },
+                      ),
                     ),
                   ),
                 ),
@@ -294,7 +309,6 @@ class _MenuLateralState extends State<MenuLateral> {
                         height: 60,
                         color: corMenuConteudo,
                         child: ListTile(
-
                           leading: Icon(
                             myIcon,
                             color: corIcone,
